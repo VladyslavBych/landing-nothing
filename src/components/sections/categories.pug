@@ -1,0 +1,27 @@
+section.c-categories#categories
+    .o-container
+        h2.c-section-title.c-categories__title
+            | Browse Nothing
+            br
+            | products by category
+
+        .c-categories__list
+            each category in productCategories
+                article.c-category
+                    .o-grid.c-category__gallery(
+                        class=category.wideFirst ? 'c-category__gallery--wide-first' : 'c-category__gallery--wide-second'
+                    )
+                        each img, idx in category.images
+                            .c-category__photo-wrap(class=`c-category__photo-wrap--${idx + 1}`)
+                                +picture(
+                                    img.name,
+                                    img.alt,
+                                    720,
+                                    348,
+                                    true,
+                                    '(min-width: 1260px) 672px, (min-width: 744px) 392px, 130px'
+                                ).c-category__img
+                    h3.c-category__title= category.title
+
+        .o-grid.c-categories__actions
+            a.c-button.c-categories__btn(href='#recommended') View all

@@ -1,8 +1,8 @@
-mixin picture(name, alt, width, height, lazy = true, sizes = '(min-width: 1280px) 360px, (min-width: 768px) 33vw, 50vw')
+mixin picture(name, alt, width, height, lazy = true, sizes = '(min-width: 1280px) 360px, (min-width: 768px) 340px, 280px')
   - const base = '%BASE_URL%';
   - const path = base + 'images/' + name;
   - const small = Math.floor(width / 2);
-  picture&attributes(attributes)
+  picture
     each format in ['avif', 'webp']
       source(
         type=`image/${format}`,
@@ -19,4 +19,4 @@ mixin picture(name, alt, width, height, lazy = true, sizes = '(min-width: 1280px
       decoding='async',
       loading=lazy ? 'lazy' : null,
       fetchpriority=lazy ? null : 'high'
-    )
+    )&attributes(attributes)

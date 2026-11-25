@@ -1,0 +1,9 @@
+@use '../2-tools' as *;
+
+.u-visually-hidden {
+  @include visually-hidden;
+}
+
+.u-text-center {
+  text-align: center !important;
+}

@@ -1,0 +1,46 @@
+@use '../1-settings' as *;
+@use '../2-tools' as *;
+
+.c-field__control {
+  display: block;
+  width: 100%;
+  height: rem(48);
+  padding: rem(14) rem(16);
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  background-color: var(--color-surface);
+  font-size: rem(14);
+  line-height: 1.4;
+  color: var(--color-text);
+  transition:
+          border-color $transition-base,
+          background-color $transition-base;
+
+  &::placeholder {
+    color: var(--color-text-muted);
+    transition: color $transition-base;
+  }
+
+  &:hover {
+    border-color: var(--color-border);
+
+    &::placeholder {
+      color: var(--color-text);
+    }
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: var(--color-text);
+  }
+
+  &:user-invalid {
+    border-color: #d93025;
+  }
+
+  &--textarea {
+    height: rem(148);
+    resize: vertical;
+  }
+}

@@ -1,0 +1,17 @@
+@use '../1-settings' as *;
+@use '../2-tools' as *;
+
+.o-container {
+  width: 100%;
+  max-width: rem(1260);
+  margin-inline: auto;
+  padding-inline: rem(20);
+
+  @include mq(md) {
+    padding-inline: rem(72);
+  }
+
+  @include mq(lg) {
+    padding-inline: rem(120);
+  }
+}

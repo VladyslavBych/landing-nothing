@@ -1,0 +1,23 @@
+aside.c-menu#menu(aria-label='Mobile and desktop navigation')
+    .o-container.c-menu__container
+        .c-menu__top
+            a.c-menu__logo(href='#', aria-label='Nothing home')
+                +icon('logo', 172, 24)
+
+            label.c-menu__close(
+                for='menu-toggle',
+                role='button',
+                tabindex='0',
+                aria-label='Close menu'
+            )
+                +icon('close', 24)
+
+        nav.c-menu__nav(aria-label='Main menu')
+            ul.c-menu__list
+                each item in navItems
+                    li.c-menu__item
+                        a.c-menu__link(href=item.href)= item.label
+
+        .c-menu__contacts
+            a.c-menu__phone(href='tel:+12345555555') +1 234 555-55-55
+            a.c-menu__cta(href='tel:+12345555555') Call to order

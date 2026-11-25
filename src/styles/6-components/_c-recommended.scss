@@ -1,0 +1,39 @@
+// _c-recommended.scss
+@use '../1-settings' as *;
+@use '../2-tools' as *;
+
+.c-recommended {
+  padding-top: rem(64);
+
+  @include mq(md) {
+    padding-top: rem(120);
+  }
+
+  &__title {
+    margin-bottom: rem(48);
+
+    @include mq(md) {
+      margin-bottom: rem(56);
+    }
+  }
+
+  &__list {
+    row-gap: rem(40);
+
+    @include mq(md) {
+      row-gap: rem(56);
+    }
+  }
+
+  &__item {
+    grid-column: 1 / -1;
+
+    @include mq(md) {
+      grid-column: 2 / 6;
+    }
+
+    @include mq(lg) {
+      grid-column: span 4;
+    }
+  }
+}

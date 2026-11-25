@@ -1,0 +1,150 @@
+@use '../1-settings' as *;
+@use '../2-tools' as *;
+
+.c-header {
+  --hero-h: #{rem(568)};
+
+  @include mq(md) {
+    --hero-h: #{rem(840)};
+  }
+
+  @include mq(lg) {
+    --hero-h: #{rem(710)};
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: rem(72);
+  overflow: hidden;
+
+  @include mq(md) {
+    height: rem(96);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: var(--hero-h);
+    background-color: #e4e6e8;
+    background-image: url('/images/hero-1440.jpg');
+    background-image: image-set(
+            url('/images/hero-1440.avif') type('image/avif'),
+            url('/images/hero-1440.webp') type('image/webp'),
+            url('/images/hero-1440.jpg') type('image/jpeg')
+    );
+    background-repeat: no-repeat;
+    background-position: 62% center;
+    background-size: cover;
+    pointer-events: none;
+
+    @include mq(md) {
+      background-position: center center;
+    }
+  }
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-text);
+
+    @include focus-ring;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: rem(24);
+
+    @include mq(md) {
+      gap: rem(32);
+    }
+  }
+
+  &__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: rem(12);
+    color: var(--color-text);
+
+    @include focus-ring;
+  }
+
+  &__phone-number {
+    display: none;
+    font-family: var(--font-heading);
+    font-size: rem(12);
+    font-weight: 700;
+    line-height: 1.33;
+    letter-spacing: rem(2);
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(rem(8));
+    pointer-events: none;
+    transition:
+            opacity $transition-base,
+            transform $transition-base;
+
+    @include mq(lg) {
+      display: inline-block;
+    }
+  }
+
+  &__phone:hover &__phone-number,
+  &__phone:focus-visible &__phone-number {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  &__burger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(24);
+    height: rem(24);
+    cursor: pointer;
+
+    @include focus-ring;
+  }
+
+  &__burger-default,
+  &__burger-hover {
+    width: rem(24);
+    height: rem(24);
+    transition: opacity $transition-base;
+  }
+
+  &__burger-hover {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  &__burger:hover &__burger-default,
+  &__burger:focus-visible &__burger-default {
+    opacity: 0;
+  }
+
+  &__burger:hover &__burger-hover,
+  &__burger:focus-visible &__burger-hover {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,18 @@
+@use '../1-settings' as *;
+@use '../2-tools' as *;
+
+.o-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: rem(20);
+
+  @include mq(md) {
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: rem(24);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: rem(24);
+  }
+}

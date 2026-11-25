@@ -1,0 +1,44 @@
+// _c-product-card.scss
+@use '../1-settings' as *;
+@use '../2-tools' as *;
+
+.c-product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__media {
+    margin-bottom: rem(24);
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform $transition-base;
+  }
+
+  &:hover &__img {
+    transform: scale(1.04);
+  }
+
+  &__title {
+    margin-bottom: rem(8);
+    font-size: rem(18);
+    line-height: 1.4;
+  }
+
+  &__desc {
+    margin-bottom: rem(12);
+    font-size: rem(16);
+    line-height: 1.4;
+  }
+
+  &__price {
+    margin-top: auto;
+    font-family: var(--font-heading);
+    font-size: rem(16);
+    font-weight: 700;
+  }
+}

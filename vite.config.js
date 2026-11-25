@@ -2,6 +2,7 @@ import vituum from 'vituum';
 import pug from '@vituum/vite-plugin-pug';
 import path from 'path';
 
+
 export default ({ command }) => ({
   base: command === 'build' ? '/landing-nothing/' : '/',
   plugins: [

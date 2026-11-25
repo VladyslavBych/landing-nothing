@@ -1,0 +1,58 @@
+section.c-contacts#contacts
+    .o-container
+        h2.c-section-title.c-contacts__title Contact us
+
+        .o-grid
+            form.c-contacts__form(action='#', method='post')
+                .c-field.c-contacts__field
+                    label.u-visually-hidden(for='contact-name') Name
+                    input.c-field__control#contact-name(
+                        type='text',
+                        name='name',
+                        placeholder='Name',
+                        autocomplete='name',
+                        required
+                    )
+
+                .c-field.c-contacts__field
+                    label.u-visually-hidden(for='contact-email') Email
+                    input.c-field__control#contact-email(
+                        type='email',
+                        name='email',
+                        placeholder='Email',
+                        autocomplete='email',
+                        required
+                    )
+
+                .c-field.c-contacts__field
+                    label.u-visually-hidden(for='contact-message') Message
+                    textarea.c-field__control.c-field__control--textarea#contact-message(
+                        name='message',
+                        placeholder='Message',
+                        rows='5',
+                        required
+                    )
+
+                button.c-button.c-contacts__submit(type='submit') Send
+
+            address.c-contacts__info
+                .c-contacts__group
+                    p.c-contacts__label Phone
+                    a.c-contacts__value(href='tel:+12345555555') +1 234 5555-55-55
+
+                .c-contacts__group
+                    p.c-contacts__label Email
+                    a.c-contacts__value(href='mailto:hello@nothing.com') hello@nothing.com
+
+                .c-contacts__group
+                    p.c-contacts__label Address
+                    a.c-contacts__value(
+                        href='https://maps.google.com/?q=400+first+ave.+suite+700+Minneapolis,+MN+55401',
+                        target='_blank',
+                        rel='noopener noreferrer'
+                    )
+                        | 400 first ave.
+                        br
+                        | suite 700
+                        br
+                        | Minneapolis, MN 55401

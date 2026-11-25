@@ -1,7 +1,9 @@
-section#home.hero
-  .container
-    h1= 'We’re Keepsake, a digital & branding agency'
-    p= 'Specializing in web design, poster, motion video, based in London. We love to turn ideas into beautiful things.'
-    .hero-actions
-      a.button.primary(href='#works')= 'See our works'
-      a.button.secondary(href='#contact')= 'Get in touch'
+section.c-hero
+  .c-hero__media
+    +picture('hero', 'Woman holding Nothing Phone (1) showing Glyph Interface', 1440, 810, false, '100vw').c-hero__img
+
+  .o-container.c-hero__container
+    h1.c-hero__title
+      | Bring joy back
+      br
+      | to the everyday

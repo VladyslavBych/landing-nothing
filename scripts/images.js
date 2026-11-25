@@ -1,24 +1,53 @@
-import { mkdir, readdir } from 'node:fs/promises';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import sharp from 'sharp';
 
-const originals = new URL('../src/assets/images/', import.meta.url);
-const output = new URL('../public/images/', import.meta.url);
-await mkdir(output, { recursive: true });
+const RAW_DIR = path.resolve('src/assets/raw-images');
+const OUT_DIR = path.resolve('public/images');
 
-for (const file of await readdir(originals)) {
-  if (!file.endsWith('.webp')) continue;
-  const name = file.slice(0, -5);
-  const width = name.startsWith('journal-') ? 300 : 720;
+async function optimizeImages() {
+  await fs.mkdir(OUT_DIR, { recursive: true });
 
-  for (const size of [width / 2, width]) {
-    const image = sharp(new URL(file, originals).pathname).resize({
-      width: size,
-    });
-    const prefix = new URL(`${name}-${size}`, output).pathname;
-    await Promise.all([
-      image.clone().avif({ quality: 50 }).toFile(`${prefix}.avif`),
-      image.clone().webp({ quality: 78 }).toFile(`${prefix}.webp`),
-      image.clone().jpeg({ quality: 82 }).toFile(`${prefix}.jpg`),
-    ]);
+  const files = await fs.readdir(RAW_DIR);
+  const imageFiles = files.filter((file) =>
+      /\.(png|jpe?g|webp)$/i.test(file),
+  );
+
+  for (const file of imageFiles) {
+    const ext = path.extname(file);
+    const name = path.basename(file, ext);
+    const inputPath = path.join(RAW_DIR, file);
+
+    const fullWidth = name === 'hero' || name === 'banner' ? 1440 : 720;
+    const halfWidth = Math.floor(fullWidth / 2);
+
+    for (const width of [halfWidth, fullWidth]) {
+      const pipeline = sharp(inputPath).resize({
+        width,
+        withoutEnlargement: true,
+      });
+
+      await pipeline
+          .clone()
+          .avif({ quality: 65 })
+          .toFile(path.join(OUT_DIR, `${name}-${width}.avif`));
+
+      await pipeline
+          .clone()
+          .webp({ quality: 80 })
+          .toFile(path.join(OUT_DIR, `${name}-${width}.webp`));
+
+      await pipeline
+          .clone()
+          .jpeg({ quality: 82, mozjpeg: true })
+          .toFile(path.join(OUT_DIR, `${name}-${width}.jpg`));
+    }
+
+    console.log(`Optimized: ${name} (${halfWidth}w, ${fullWidth}w)`);
   }
 }
+
+optimizeImages().catch((err) => {
+  console.error('Image optimization failed:', err);
+  process.exit(1);
+});
